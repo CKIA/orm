@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ckia.test.mapper.UserMapper" >
+<!--    <cache type="com.ckia.test.testaop.cache.RedisForMybatisCache"/>-->
+
+    <resultMap id="user" type="com.ckia.test.pojo.UserDto">
+        <id column="u_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id"/>
+        <result column="u_name" javaType="java.lang.String" jdbcType="VARCHAR" property="userName"/>
+        <result column="u_password" javaType="java.lang.String" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+
+    <select id="getUserList" resultType="com.ckia.test.pojo.UserDto">
+        select * from t_user limit 5
+    </select>
+    <select id="getUser" resultType="com.ckia.test.pojo.UserDto" parameterType="com.ckia.test.pojo.UserDto">
+        select * from t_user where u_id = #{u_id,jdbcType=INTEGER}
+    </select>
+    <insert id="saveListUser" parameterType="java.util.List">
+        insert into t_user(u_name,u_password) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.u_name,jdbcType=VARCHAR},#{item.u_password,jdbcType=VARCHAR})
+        </foreach>
+
+    </insert>
+
+    <insert id="saveUser" parameterType="com.ckia.test.pojo.UserDto" useGeneratedKeys="true" keyProperty="u_id">
+<!--        <selectKey resultType="INTEGER" keyColumn="u_id" keyProperty="u_id" order="AFTER">-->
+<!--            SELECT LAST_INSERT_ID() AS u_id-->
+<!--        </selectKey>-->
+        insert into t_user(u_name,u_password)value(#{u_name,jdbcType=VARCHAR},#{u_password,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateUser" parameterType="com.ckia.test.pojo.UserDto">
+        update t_user set u_name = #{u_name,jdbcType=VARCHAR} where u_id = #{u_id,jdbcType=INTEGER}
+    </update>
+</mapper>
