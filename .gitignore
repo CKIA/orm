@@ -43,4 +43,4 @@ logs/
 *.log
 mvnw
 *.cmd
-*.mvn/
+/.mvn/
