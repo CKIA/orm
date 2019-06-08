@@ -44,3 +44,4 @@ logs/
 mvnw
 *.cmd
 /.mvn/
+.mvn/
