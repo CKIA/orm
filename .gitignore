@@ -12,3 +12,5 @@ bin/
 .sftp-config.json
 logs/
 *.log
+mvnw
+*.cmd
