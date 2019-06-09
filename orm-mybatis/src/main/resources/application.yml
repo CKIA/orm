@@ -1,10 +1,11 @@
 
 
+server:
+  port: 8082
+  
 spring:
   application:
     name: orm-mybatis
-  server:
-    port: 8082
 
 ---
 spring:
@@ -44,7 +45,7 @@ spring:
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize: 20
       # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-#      filters: stat,wall,log4j
+      filters: stat,wall,log4j
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       connectionProperties:
         druid.stat.mergeSql: true
@@ -52,10 +53,10 @@ spring:
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
 
-  mybatis:
-    mapper-locations: classpath:com/ckia/test/spring/testaop/mapper/*.xml
-    configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   logging:
     level:
-      com.example.demo.dao: debug
+      com.ckia.test.mapper: debug
+
+  mybatis:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
