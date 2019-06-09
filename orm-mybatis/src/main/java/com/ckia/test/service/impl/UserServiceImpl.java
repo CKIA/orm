@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 用户操作服务类
  * @ProjectName: testaop
  * @Author: ckia
  * @Date: 19-5-23 下午2:23

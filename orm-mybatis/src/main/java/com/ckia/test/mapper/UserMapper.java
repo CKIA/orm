@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author ckia
- * @description: TODO
+ * @description: mybatis查询服务
  * @title: ckia学习累积使用
  * @projectName orm
  * @date 19-6-9上午2:54

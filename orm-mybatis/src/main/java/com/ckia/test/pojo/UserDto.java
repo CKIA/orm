@@ -1,8 +1,10 @@
 package com.ckia.test.pojo;
 
+import com.ckia.test.annotation.stringValideation.StringValidation;
+
 /**
  * @author ckia
- * @description: TODO
+ * @description: 基本用户类
  * @title: ckia学习累积使用
  * @projectName orm
  * @date 19-6-9上午3:10
@@ -24,6 +26,7 @@ public class UserDto {
         return u_name;
     }
 
+    @StringValidation("qqqqqqqqqq")
     public void setU_name(String u_name) {
         this.u_name = u_name;
     }
