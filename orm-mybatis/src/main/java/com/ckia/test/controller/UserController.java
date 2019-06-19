@@ -35,6 +35,7 @@ public class UserController {
     @Qualifier("myBaitisService")
     private UserService<UserDto> userService;
 
+
     @GetMapping("queryList")
     public List<UserDto> getUserList(){
         return userService.getUserList();
@@ -66,7 +67,6 @@ public class UserController {
     }
 
     @GetMapping("save")
-    @DataBase("mybatis-2")
     public UserDto saveUser(){
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();

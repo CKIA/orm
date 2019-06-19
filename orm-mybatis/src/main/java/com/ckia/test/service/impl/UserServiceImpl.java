@@ -6,7 +6,9 @@ import com.ckia.test.service.UserService;
 import com.ckia.test.utils.GenerateStringUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,7 +28,9 @@ public class UserServiceImpl implements UserService<UserDto> {
 
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
-
+    @Autowired
+    @Qualifier("TransactionalUserService")
+    private UserService<UserDto> transactionalUserService;
 
     @Override
     public UserDto getUser(UserDto user) {
@@ -39,9 +43,14 @@ public class UserServiceImpl implements UserService<UserDto> {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = RuntimeException.class)
     public void saveUser(UserDto user) {
         userMapper.saveUser(user);
+        try {
+            transactionalUserService.saveUser(user);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
