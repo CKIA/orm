@@ -28,9 +28,6 @@ public class UserServiceImpl implements UserService<UserDto> {
 
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
-    @Autowired
-    @Qualifier("TransactionalUserService")
-    private UserService<UserDto> transactionalUserService;
 
     @Override
     public UserDto getUser(UserDto user) {
@@ -46,11 +43,6 @@ public class UserServiceImpl implements UserService<UserDto> {
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = RuntimeException.class)
     public void saveUser(UserDto user) {
         userMapper.saveUser(user);
-        try {
-            transactionalUserService.saveUser(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override

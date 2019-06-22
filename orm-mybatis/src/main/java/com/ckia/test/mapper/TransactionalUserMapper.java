@@ -1,7 +1,6 @@
 package com.ckia.test.mapper;
 
 import com.ckia.test.pojo.UserDto;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @date 19-6-9上午2:54
  */
 //@Mapper
-public interface UserMapper {
+public interface TransactionalUserMapper {
 
     UserDto getUser(UserDto user);
 

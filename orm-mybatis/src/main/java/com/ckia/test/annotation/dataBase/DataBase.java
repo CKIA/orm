@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author ckia
  * @description: 指定数据源注解对象，用于在使用多数据源时指定使用的数据源
+ * 该注解用于方法上，需要在注入mapper前使用，否则无效
  * @title: ckia学习累积使用
  * @projectName orm
  * @date 19-6-9上午5:05

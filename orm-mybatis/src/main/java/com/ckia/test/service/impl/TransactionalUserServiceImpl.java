@@ -1,7 +1,6 @@
 package com.ckia.test.service.impl;
 
-import com.ckia.test.annotation.dataBase.DataBase;
-import com.ckia.test.mapper.UserMapper;
+import com.ckia.test.mapper.TransactionalUserMapper;
 import com.ckia.test.pojo.UserDto;
 import com.ckia.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
 public class TransactionalUserServiceImpl implements UserService<UserDto> {
 
     @Autowired
-    private UserMapper userMapper;
+    private TransactionalUserMapper userMapper;
 
     @Override
     public List<UserDto> getUserList() {
@@ -36,12 +35,10 @@ public class TransactionalUserServiceImpl implements UserService<UserDto> {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-//    @DataBase("mybatis-2")
     public void saveUser(UserDto user) {
         user.setU_id(null);
         user.setU_name(user.getU_name()+"ere");
         userMapper.saveUser(user);
-        throw new RuntimeException("Rollback this transaction!");
     }
 
     @Override

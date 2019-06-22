@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 public class TestService {
     @StringValidation("qqqqqqqqqq")
     //默认(第一)数据源
-    @DataBase("db1")
+//    @DataBase("db1")
     public void dbTest(){
         System.out.println("dbT1");
     }
 
     //第二数据源
-    @DataBase("db2")
+//    @DataBase("db2")
     public void dbTest2(){
         System.out.println("dbT2");
     }

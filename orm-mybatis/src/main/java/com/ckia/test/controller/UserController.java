@@ -2,6 +2,7 @@ package com.ckia.test.controller;
 
 import com.ckia.test.annotation.dataBase.DataBase;
 import com.ckia.test.annotation.stringValideation.StringValidation;
+import com.ckia.test.enums.DataSourceType;
 import com.ckia.test.mapper.UserMapper;
 import com.ckia.test.pojo.UserDto;
 import com.ckia.test.service.UserService;
@@ -35,6 +36,9 @@ public class UserController {
     @Qualifier("myBaitisService")
     private UserService<UserDto> userService;
 
+    @Autowired
+    @Qualifier("TransactionalUserService")
+    private UserService<UserDto> transactionalUserService;
 
     @GetMapping("queryList")
     public List<UserDto> getUserList(){
@@ -74,6 +78,19 @@ public class UserController {
         userDto.setU_name(random);
         userDto.setU_password(random);
         userService.saveUser(userDto);
+        System.out.println("time:"+(System.currentTimeMillis()-start));
+        return userDto;
+
+    }
+    @GetMapping("save2")
+    @DataBase(DataSourceType.mybatis2)
+    public UserDto saveUser2(){
+        long start = System.currentTimeMillis();
+        UserDto userDto = new UserDto();
+        String random = GenerateStringUtil.generateName();
+        userDto.setU_name(random);
+        userDto.setU_password(random);
+        transactionalUserService.saveUser(userDto);
         System.out.println("time:"+(System.currentTimeMillis()-start));
         return userDto;
 

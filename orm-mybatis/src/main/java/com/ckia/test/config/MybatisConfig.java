@@ -1,6 +1,7 @@
 package com.ckia.test.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.ckia.test.enums.DataSourceType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -67,9 +68,8 @@ public class MybatisConfig {
         dynamicDataSource.setDefaultTargetDataSource(mybatisDataSource());
 
         // 配置多数据源
-        Map<Object, Object> dsMap = new HashMap(5);
-        dsMap.put("mybatis", mybatisDataSource());
-        dsMap.put("mybatis-2", mybatisDataSource2());
+        Map<Object, Object> dsMap = new HashMap(2);
+        dsMap.put(DataSourceType.mybatis2, mybatisDataSource2());
 
         dynamicDataSource.setTargetDataSources(dsMap);
 
