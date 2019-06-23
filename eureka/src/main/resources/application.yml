@@ -1,0 +1,44 @@
+# 服务名
+spring:
+  profiles:
+    active: dev
+  application:
+  name: ckia-server
+# server (eureka 默认端口为：8761)
+logging:
+  file: ckia-server.log
+
+---
+spring:
+  profiles:
+    active: server
+server:
+  port: 18761
+
+eureka:
+  client:
+    register-with-eureka: false #是否将eureka自身作为应用注册到eureka注册中心
+    fetch-registry: false #为true时，可以启动，但报异常：Cannot execute request on any known server
+    service-url:
+    # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址(单机版)
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    # 集群版
+      defaultZone: http://127.0.0.1:8761/eureka/
+---
+spring:
+  profiles:
+    active: server2
+server:
+  port: 28761
+
+eureka:
+  client:
+    #是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: false
+    #为true时，可以启动，但报异常：Cannot execute request on any known server
+    fetch-registry: false
+    service-url:
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址(单机版)
+      #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # 集群版
+      defaultZone: http://127.0.0.1:28761/eureka/

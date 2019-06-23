@@ -7,11 +7,12 @@
     <groupId>com.ckia.tset</groupId>
     <artifactId>orm</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>rabbitmq-client</module>
+        <module>eureka</module>
+    </modules>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>orm-mybatis</module>
-    </modules>
     <properties>
         <java.version>1.8</java.version>
     </properties>

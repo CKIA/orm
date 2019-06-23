@@ -1,0 +1,19 @@
+
+
+server:
+  port: 8083
+
+spring:
+  application:
+    name: rebbitmq-server
+
+---
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 192.168.0.100
+    port: 5672
+    username: admin
+    password: admin
+

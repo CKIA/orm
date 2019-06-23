@@ -1,0 +1,22 @@
+
+
+server:
+  port: 8084
+
+spring:
+  application:
+    name: rabbitmq-client
+
+---
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    host: 192.168.0.100
+    port: 5672
+    username: admin
+    password: admin
+
+  eureka:
+    client:
+        defaultZone: http://127.0.0.1:28761/eureka/

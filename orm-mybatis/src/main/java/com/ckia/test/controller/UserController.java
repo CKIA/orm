@@ -4,7 +4,9 @@ import com.ckia.test.annotation.dataBase.DataBase;
 import com.ckia.test.annotation.stringValideation.StringValidation;
 import com.ckia.test.enums.DataSourceType;
 import com.ckia.test.mapper.UserMapper;
+import com.ckia.test.pojo.LoggerDto;
 import com.ckia.test.pojo.UserDto;
+import com.ckia.test.service.LogService;
 import com.ckia.test.service.UserService;
 import com.ckia.test.service.impl.TestService;
 import com.ckia.test.utils.GenerateStringUtil;
@@ -15,6 +17,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +40,9 @@ public class UserController {
     private UserService<UserDto> userService;
 
     @Autowired
+    private LogService logService;
+
+    @Autowired
     @Qualifier("TransactionalUserService")
     private UserService<UserDto> transactionalUserService;
 
@@ -50,13 +56,25 @@ public class UserController {
         userService.test();
     }
 
-    @GetMapping("query")
-    public UserDto getUser(){
-        UserDto userDto = new UserDto();
-        userDto.setU_id(33);
-//        userDto.setU_name("891623dd");
-//        return userDto;
+    @PostMapping("query")
+    public UserDto getUser(UserDto userDto){
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/query");
+        dto.setL_type(0);
+        logService.saveLoggerDto(dto);
         UserDto user = userService.getUser(userDto);
+
+        System.out.println(user);
+        return user;
+    }
+    @PostMapping("query2")
+    @DataBase(DataSourceType.mybatis2)
+    public UserDto getUser2(UserDto userDto){
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/query2");
+        dto.setL_type(0);
+        logService.saveLoggerDto(dto);
+        UserDto user = transactionalUserService.getUser(userDto);
 
         System.out.println(user);
         return user;
@@ -72,6 +90,10 @@ public class UserController {
 
     @GetMapping("save")
     public UserDto saveUser(){
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/save");
+        dto.setL_type(1);
+        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
@@ -85,6 +107,10 @@ public class UserController {
     @GetMapping("save2")
     @DataBase(DataSourceType.mybatis2)
     public UserDto saveUser2(){
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/save2");
+        dto.setL_type(1);
+        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
@@ -108,20 +134,23 @@ public class UserController {
         long start = System.currentTimeMillis();
         userService.saveListUser(list);
         System.out.println("time:"+(System.currentTimeMillis()-start));
-//        SqlSession session = sessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH);
-//        UserMapper mapper = session.getMapper(UserMapper.class);
-        long start2 = System.currentTimeMillis();
-//        ArrayList<UserDto> list2 = new ArrayList<>();
-//        for (int index=10000;index>0;index--){
-//            UserDto userDto = new UserDto();
-//            String random = GenerateStringUtil.generateName();
-//            userDto.setU_name(index+random+"D");
-//            userDto.setU_password(random);
-//            list2.add(userDto);
-//        }
-//        mapper.saveListUser(list2);
-//        session.commit();
-        System.out.println("sqlSessionTemplate-time:"+(System.currentTimeMillis()-start2));
+        return "success";
+
+    }
+    @GetMapping("saveListUser2")
+    @DataBase(DataSourceType.mybatis2)
+    public String saveListUser2(){
+        ArrayList<UserDto> list = new ArrayList<>();
+        for (int index=10000;index>0;index--){
+            UserDto userDto = new UserDto();
+            String random = GenerateStringUtil.generateName();
+            userDto.setU_name(index+random+"C");
+            userDto.setU_password(random);
+            list.add(userDto);
+        }
+        long start = System.currentTimeMillis();
+        transactionalUserService.saveListUser(list);
+        System.out.println("time:"+(System.currentTimeMillis()-start));
         return "success";
 
     }

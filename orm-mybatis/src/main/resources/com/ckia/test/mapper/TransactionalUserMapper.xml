@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ckia.test.mapper.TransactionalUserMapper" >
-<!--    <cache type="com.ckia.test.testaop.cache.RedisForMybatisCache"/>-->
+<!--    <cache type="test.testaop.cache.RedisForMybatisCache"/>-->
 
     <resultMap id="user" type="com.ckia.test.pojo.UserDto">
         <id column="u_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id"/>

@@ -43,7 +43,7 @@ public class TransactionalUserServiceImpl implements UserService<UserDto> {
 
     @Override
     public void saveListUser(List<UserDto> users) {
-
+        userMapper.saveListUser(users);
     }
 
     @Override
