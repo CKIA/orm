@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class UserController {
     @Qualifier("myBaitisService")
     private UserService<UserDto> userService;
 
-    @Autowired
+    @Resource
     private LogService logService;
 
     @Autowired
