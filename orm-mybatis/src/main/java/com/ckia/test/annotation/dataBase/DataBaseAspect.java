@@ -22,7 +22,8 @@ import java.lang.reflect.Method;
 @Component
 public class DataBaseAspect {
 
-    @Pointcut("@annotation(com.ckia.test.annotation.dataBase.DataBase)")
+//    @Pointcut("@annotation(com.ckia.test.annotation.dataBase.DataBase)")
+    @Pointcut("execution(* com.ckia.test.service.*.*(..))")
     public void dbPointCut() {
     }
 
@@ -42,10 +43,13 @@ public class DataBaseAspect {
             Method method = className.getMethod(methodName, argClass);
 
             // 判断是否存在@DateBase注解
-            if (method.isAnnotationPresent(DataBase.class)) {
-                DataBase annotation = method.getAnnotation(DataBase.class);
-                // 取出注解中的数据源名
-                dataSource = annotation.value();
+//            if (method.isAnnotationPresent(DataBase.class)) {
+//                DataBase annotation = method.getAnnotation(DataBase.class);
+//                // 取出注解中的数据源名
+//                dataSource = annotation.value();
+//            }
+            if(method.getName().startsWith("saveUser2")) {
+                dataSource = "mybatis-2";
             }
         } catch (Exception e) {
             e.printStackTrace();

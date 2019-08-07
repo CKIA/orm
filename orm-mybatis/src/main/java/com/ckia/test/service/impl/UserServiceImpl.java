@@ -43,6 +43,12 @@ public class UserServiceImpl implements UserService<UserDto> {
     public void saveUser(UserDto user) {
         userMapper.saveUser(user);
     }
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = RuntimeException.class)
+    public void saveUser2(UserDto user) {
+        userMapper.saveUser(user);
+    }
+
 
     @Override
     public void saveListUser(List<UserDto> users) {

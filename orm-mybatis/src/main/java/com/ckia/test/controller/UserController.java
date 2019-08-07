@@ -94,7 +94,7 @@ public class UserController {
         LoggerDto dto = new LoggerDto();
         dto.setL_detail("user/save");
         dto.setL_type(1);
-        logService.saveLoggerDto(dto);
+//        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
@@ -111,13 +111,13 @@ public class UserController {
         LoggerDto dto = new LoggerDto();
         dto.setL_detail("user/save2");
         dto.setL_type(1);
-        logService.saveLoggerDto(dto);
+//        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
         userDto.setU_name(random);
         userDto.setU_password(random);
-        transactionalUserService.saveUser(userDto);
+        userService.saveUser2(userDto);
         System.out.println("time:"+(System.currentTimeMillis()-start));
         return userDto;
 

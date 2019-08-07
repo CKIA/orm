@@ -18,6 +18,8 @@ public interface UserService<T> {
 
     void saveUser(T user);
 
+    void saveUser2(T user);
+
     void saveListUser(List<T> users);
 
     void updateUser(T user);
