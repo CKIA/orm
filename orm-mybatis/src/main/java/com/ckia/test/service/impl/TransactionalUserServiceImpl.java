@@ -42,6 +42,11 @@ public class TransactionalUserServiceImpl implements UserService<UserDto> {
     }
 
     @Override
+    public void saveUser2(UserDto user) {
+
+    }
+
+    @Override
     public void saveListUser(List<UserDto> users) {
         userMapper.saveListUser(users);
     }
