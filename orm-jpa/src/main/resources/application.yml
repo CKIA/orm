@@ -27,6 +27,11 @@ spring:
       username: root
       password: ckia
 
-
-  logging:
-    level:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibenate:
+        format_sql: false
+    show-sql: true

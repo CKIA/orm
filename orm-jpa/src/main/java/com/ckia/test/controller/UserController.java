@@ -54,24 +54,24 @@ public class UserController {
 
     @PostMapping("query")
     public UserDto getUser(UserDto userDto){
-        LoggerDto dto = new LoggerDto();
-        dto.setL_detail("user/query");
-        dto.setL_type(0);
-        logService.saveLoggerDto(dto);
         UserDto user = userService.getUser(userDto);
-
+        LoggerDto dto = new LoggerDto();
+        dto.setL_userId(userDto.getU_id());
+        logService.getLoggerDto(dto);
+        System.out.println(dto);
         System.out.println(user);
+        System.out.println(dto);
         return user;
     }
     @PostMapping("query2")
     public UserDto getUser2(UserDto userDto){
+        UserDto user = userService.getUser(userDto);
         LoggerDto dto = new LoggerDto();
-        dto.setL_detail("user/query2");
-        dto.setL_type(0);
-        logService.saveLoggerDto(dto);
-        UserDto user = transactionalUserService.getUser(userDto);
-
+        dto.setL_userId(userDto.getU_id());
+        System.out.println(dto);
+        logService.getLoggerDto(dto);
         System.out.println(user);
+        System.out.println(dto);
         return user;
     }
 
@@ -85,33 +85,37 @@ public class UserController {
 
     @GetMapping("save")
     public UserDto saveUser(){
-        LoggerDto dto = new LoggerDto();
-        dto.setL_detail("user/save");
-        dto.setL_type(1);
-//        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
         userDto.setU_name(random);
         userDto.setU_password(random);
         userService.saveUser(userDto);
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/save");
+        dto.setL_type(1);
+        dto.setL_userId(userDto.getU_id());
+        logService.saveLoggerDto(dto);
         System.out.println("time:"+(System.currentTimeMillis()-start));
+        System.out.println("user:"+userDto+",log:"+dto);
         return userDto;
 
     }
     @GetMapping("save2")
     public UserDto saveUser2(){
-        LoggerDto dto = new LoggerDto();
-        dto.setL_detail("user/save2");
-        dto.setL_type(1);
-//        logService.saveLoggerDto(dto);
         long start = System.currentTimeMillis();
         UserDto userDto = new UserDto();
         String random = GenerateStringUtil.generateName();
         userDto.setU_name(random);
         userDto.setU_password(random);
         userService.saveUser2(userDto);
+        LoggerDto dto = new LoggerDto();
+        dto.setL_detail("user/save2");
+        dto.setL_type(1);
+        dto.setL_userId(userDto.getU_id());
+        logService.saveLoggerDto(dto);
         System.out.println("time:"+(System.currentTimeMillis()-start));
+        System.out.println("user:"+userDto+",log:"+dto);
         return userDto;
 
     }

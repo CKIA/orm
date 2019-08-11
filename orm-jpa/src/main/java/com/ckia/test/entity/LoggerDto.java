@@ -18,7 +18,16 @@ public class LoggerDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer l_id;
     private Integer l_type;
+    private Integer l_userId;
     private String l_detail;
+
+    public Integer getL_userId() {
+        return l_userId;
+    }
+
+    public void setL_userId(Integer l_userId) {
+        this.l_userId = l_userId;
+    }
 
     public Integer getL_id() {
         return l_id;
@@ -50,6 +59,7 @@ public class LoggerDto {
                 "l_id=" + l_id +
                 ", l_type='" + l_type + '\'' +
                 ", l_detail='" + l_detail + '\'' +
+                ", l_userId='" + l_userId + '\'' +
                 '}';
     }
 }

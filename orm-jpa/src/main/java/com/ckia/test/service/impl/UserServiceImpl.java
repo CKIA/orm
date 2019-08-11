@@ -5,6 +5,7 @@ import com.ckia.test.entity.UserDto;
 import com.ckia.test.service.UserService;
 import com.ckia.test.utils.GenerateStringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService<UserDto> {
 
     @Override
     public UserDto getUser(UserDto user) {
-        return userRepository.save(user);
+        return userRepository.findOne(Example.of(user)).get();
     }
 
     @Override

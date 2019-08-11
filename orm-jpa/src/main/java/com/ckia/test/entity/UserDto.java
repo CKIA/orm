@@ -19,6 +19,18 @@ public class UserDto {
     private String u_password;
     private String u_name;
 
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @JoinColumn(name="u_id",referencedColumnName = "l_userId")
+    private LoggerDto log;
+
+    public LoggerDto getLog() {
+        return log;
+    }
+
+    public void setLog(LoggerDto log) {
+        this.log = log;
+    }
+
     public Integer getU_id() {
         return u_id;
     }
@@ -44,6 +56,7 @@ public class UserDto {
                 "u_id=" + u_id +
                 ", u_password='" + u_password + '\'' +
                 ", u_name='" + u_name + '\'' +
+                ", log='" + log + '\'' +
                 '}';
     }
 

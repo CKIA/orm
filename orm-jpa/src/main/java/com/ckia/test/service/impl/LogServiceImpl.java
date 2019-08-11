@@ -4,6 +4,7 @@ import com.ckia.test.repository.LogRepository;
 import com.ckia.test.entity.LoggerDto;
 import com.ckia.test.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +25,8 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public LoggerDto getLoggerDto(LoggerDto logger) {
-        return logRepository.getOne(logger.getL_id());
+        return logRepository.findOne(Example.of(logger)).get();
+//        return logRepository.getOne(logger.getL_id());
     }
 
     @Override
