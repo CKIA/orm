@@ -1,0 +1,32 @@
+
+
+server:
+  port: 8083
+
+spring:
+  application:
+    name: orm-jpa
+
+---
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    master:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/users?useUnicode=true&characterEncoding=UTF-8
+      username: ckia
+      password: ckia
+
+    slave:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.0.100:3306/users?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: ckia
+
+
+  logging:
+    level:
